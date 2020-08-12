@@ -2,31 +2,35 @@ import React from 'react';
 import {Square} from "../Square/Square";
 import styles from "./Board.module.css";
 
-const Board = () => {
-    const status = 'Next player: X';
+type Props = {
+    squares: string[],
+    winners: boolean[],
+    onClick: (i: number) => void,
+}
+
+const Board = (props: Props) => {
 
     const renderSquare = (i: number) => (
-        <Square />
+        <Square
+            value={props.squares[i]}
+            isWinner={props.winners[i]}
+            onClick={() => props.onClick(i)}
+            key={i}
+        />
     );
 
     return (
         <div>
-            <div className={styles.status}>{status}</div>
-            <div className={styles.boardRow}>
-                {renderSquare(0)}
-                {renderSquare(1)}
-                {renderSquare(2)}
-            </div>
-            <div className={styles.boardRow}>
-                {renderSquare(3)}
-                {renderSquare(4)}
-                {renderSquare(5)}
-            </div>
-            <div className={styles.boardRow}>
-                {renderSquare(6)}
-                {renderSquare(7)}
-                {renderSquare(8)}
-            </div>
+            {[0, 1, 2].map(i => {
+                return (
+                    <div className={styles.boardRow} key={i}>
+                        {
+                            [0, 1, 2].map(j => {
+                                return renderSquare(i * 3 + j);
+                            })}
+                    </div>
+                )
+            })}
         </div>
     );
 }
