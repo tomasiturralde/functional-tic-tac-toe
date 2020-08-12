@@ -2,16 +2,14 @@ import React from 'react';
 import {Square} from "../Square/Square";
 import styles from "./Board.module.css";
 
-const Board = () => {
-    const status = 'Next player: X';
+const Board = (props: {squares: string[], onClick: (i: number) => void}) => {
 
     const renderSquare = (i: number) => (
-        <Square />
+        <Square value={props.squares[i]} onClick={() => props.onClick(i)} />
     );
 
     return (
         <div>
-            <div className={styles.status}>{status}</div>
             <div className={styles.boardRow}>
                 {renderSquare(0)}
                 {renderSquare(1)}
