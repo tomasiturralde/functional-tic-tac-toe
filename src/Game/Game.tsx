@@ -9,7 +9,7 @@ const Game = () => {
                 <Board />
             </div>
             <div className={styles.gameInfo}>
-                <div>{/* status */}</div>
+                <div>status</div>
                 <ol>{/* TODO */}</ol>
             </div>
         </div>
